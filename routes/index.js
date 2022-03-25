@@ -2,6 +2,7 @@ const express = require('express');
 
 const userRoutes = require('./users');
 const movieRoutes = require('./movies');
+const auth = require('../middlewares/auth');
 const { login, createUser } = require('../controllers/users');
 const NotFoundError = require('../errors/notFoundError');
 
@@ -9,6 +10,7 @@ const routes = express.Router();
 
 routes.post('/signup', express.json(), createUser);
 routes.post('/signin', express.json(), login);
+routes.use(auth);
 routes.use('/user', userRoutes);
 routes.use('/movie', movieRoutes);
 routes.use('*', () => {
