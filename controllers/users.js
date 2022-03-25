@@ -16,12 +16,35 @@ const {
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
-module.exports.getUser = () => {
-  // getUser
+module.exports.getUser = async (req, res, next) => {
+  try {
+    const currentUser = await User.find({ _id: req.user._id });
+    res.status(OK_CODE).send(currentUser);
+  } catch (err) {
+    next(new BadRequestError('Произошла ошибка'));
+  }
 };
 
-module.exports.updateUser = () => {
-  // updateUser
+module.exports.updateUser = async (req, res, next) => {
+  try {
+    const id = req.user._id;
+    const { name, email } = req.body;
+    const updatedUserInfo = await User.findByIdAndUpdate(
+      id,
+      { name, email },
+      {
+        new: true,
+        runValidators: true,
+      },
+    );
+    res.status(OK_CODE).send(updatedUserInfo);
+  } catch (err) {
+    if (err.name === 'ValidationError') {
+      next(new BadRequestError(err.message));
+    } else {
+      next(err);
+    }
+  }
 };
 
 module.exports.createUser = async (req, res, next) => {

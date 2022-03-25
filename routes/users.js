@@ -8,6 +8,6 @@ const {
 } = require('../controllers/users');
 
 userRoutes.get('/me', getUser);
-userRoutes.patch('/me', updateUser);
+userRoutes.patch('/me', express.json(), updateUser);
 
 module.exports = userRoutes;
