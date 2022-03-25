@@ -11,8 +11,8 @@ const routes = express.Router();
 routes.post('/signup', express.json(), createUser);
 routes.post('/signin', express.json(), login);
 routes.use(auth);
-routes.use('/user', userRoutes);
-routes.use('/movie', movieRoutes);
+routes.use('/users', userRoutes);
+routes.use('/movies', movieRoutes);
 routes.use('*', () => {
   throw new NotFoundError('Страница не найдена. Проверьте URL');
 });
