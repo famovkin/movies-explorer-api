@@ -9,7 +9,7 @@ const {
 } = require('../controllers/movies');
 
 movieRoutes.get('/', getSavedMovies);
-movieRoutes.post('/', createMovie);
+movieRoutes.post('/', express.json(), createMovie);
 movieRoutes.delete('/:id', deleteSavedMovie);
 
 module.exports = movieRoutes;
