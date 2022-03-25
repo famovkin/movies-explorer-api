@@ -21,7 +21,6 @@ movieRoutes.post('/', express.json(), celebrate({
     image: Joi.string().custom(validateURL, 'URL validation').required(),
     trailerLink: Joi.string().custom(validateURL, 'URL validation').required(),
     thumbnail: Joi.string().custom(validateURL, 'URL validation').required(),
-    owner: Joi.string().required(),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),

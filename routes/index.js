@@ -10,22 +10,22 @@ const NotFoundError = require('../errors/notFoundError');
 
 const routes = express.Router();
 
-routes.post('/signup', express.json(), celebrate({
+routes.post('/api/signup', express.json(), celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     email: Joi.string().custom(validateEmail, 'Email validation').required(),
     password: Joi.string().required(),
   }),
 }), createUser);
-routes.post('/signin', express.json(), celebrate({
+routes.post('/api/signin', express.json(), celebrate({
   body: Joi.object().keys({
     email: Joi.string().custom(validateEmail, 'Email validation').required(),
     password: Joi.string().required(),
   }),
 }), login);
 routes.use(auth);
-routes.use('/users', userRoutes);
-routes.use('/movies', movieRoutes);
+routes.use('/api/users', userRoutes);
+routes.use('/api/movies', movieRoutes);
 routes.use('*', () => {
   throw new NotFoundError('Страница не найдена. Проверьте URL');
 });
