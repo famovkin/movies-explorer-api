@@ -4,56 +4,63 @@ const validator = require('validator');
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    require: true,
+    required: true,
   },
   director: {
     type: String,
-    require: true,
+    required: true,
   },
   duration: {
     type: Number,
-    require: true,
+    required: true,
   },
   year: {
     type: String,
-    require: true,
+    required: true,
   },
   description: {
     type: String,
-    require: true,
+    required: true,
   },
   image: {
     type: String,
-    require: true,
-    validate: (v) => validator.isURL(v),
-    message: 'Проверьте правильность ссылки на постер',
+    required: true,
+    validate: {
+      validator: (v) => validator.isURL(v),
+      message: 'Проверьте правильность ссылки на постер',
+    },
   },
   trailerLink: {
     type: String,
-    require: true,
-    validate: (v) => validator.isURL(v),
-    message: 'Проверьте правильность ссылки на трейлер',
+    required: true,
+    validate: {
+      validator: (v) => validator.isURL(v),
+      message: 'Проверьте правильность ссылки на трейлер',
+    },
   },
   thumbnail: {
     type: String,
-    require: true,
-    validate: (v) => validator.isURL(v),
-    message: 'Проверьте правильность ссылки на миниатюру постера',
+    required: true,
+    validate: {
+      validator: (v) => validator.isURL(v),
+      message: 'Проверьте правильность ссылки на миниатюру постера',
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
   movieId: {
-    require: true,
+    type: Number,
+    required: true,
   },
   nameRU: {
     type: String,
-    require: true,
+    rerequiredquire: true,
   },
   nameEN: {
     type: String,
-    require: true,
+    required: true,
   },
 });
 
