@@ -7,6 +7,7 @@ const NOT_FOUND_CODE = 404;
 const DUPLICATE_CODE = 409;
 const SERVER_ERROR_CODE = 500;
 const MONGO_DUPLICATE_ERROR_CODE = 11000;
+const SALT_ROUND = 10;
 
 module.exports = {
   OK_CODE,
@@ -18,4 +19,5 @@ module.exports = {
   DUPLICATE_CODE,
   SERVER_ERROR_CODE,
   MONGO_DUPLICATE_ERROR_CODE,
+  SALT_ROUND,
 };
