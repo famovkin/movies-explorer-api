@@ -13,7 +13,8 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
 });
-const { PORT = 3000 } = process.env;
+
+const { PORT } = process.env;
 
 app.use(limiter);
 app.use(cors());
@@ -35,7 +36,7 @@ app.use((err, req, res, next) => {
 });
 
 async function startApp() {
-  await mongoose.connect('mongodb://localhost:27017/moviesdb');
+  await mongoose.connect(process.env.DATABASE_URL);
   await app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
   });
